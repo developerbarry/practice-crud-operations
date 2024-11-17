@@ -45,15 +45,14 @@ async function run() {
             const user = req.body;
             const result = await ourUsers.insertOne(user)
             res.send(result)
-        
-        })
 
+        })
 
         app.put(`/users/:id`, async (req, res) => {
             const id = req.params.id;
             const updated = req.body;
             console.log(id, updated)
-        
+
             const filter = { _id: new ObjectId(id) };
             const options = { upsert: true };
             const updateDoc = {
@@ -65,7 +64,6 @@ async function run() {
             const result = await ourUsers.updateOne(filter, updateDoc, options);
             res.send(result)
         })
-
 
         app.delete('/users/:id', async (req, res) => {
             const id = req.params.id;
