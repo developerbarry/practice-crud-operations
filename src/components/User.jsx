@@ -5,7 +5,22 @@ const User = () => {
     const userData = useLoaderData()
     const [users, setUser] = useState(userData)
 
-    
+    const handleDelete = (userId) => {
+        const id = userId;
+        console.log(id)
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    alert('Delete Successfully Done!')
+                    const deleteUser = users.filter(user => user._id !== id)
+                    setUser(deleteUser)
+                }
+            })
+    }
 
     return (
         <div>
